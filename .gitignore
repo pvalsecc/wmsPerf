@@ -1,0 +1,15 @@
+*~
+build/
+.classpath
+.gradle/
+gradle-app.setting
+.project
+.settings/
+examples/build/
+core/build/
+
+
+core/gradle/
+core/gradlew
+.idea/
+*.iml

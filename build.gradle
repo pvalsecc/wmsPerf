@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+task wrapper(type: Wrapper) {
+    description 'Creates or deletes the gradle wrapper.'
+    gradleVersion = '2.9'
+}
+
+repositories {
+    mavenCentral()
+}
+
+version = 1.0
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+dependencies {
+    compile "org.apache.httpcomponents:httpclient:4.5.1"
+}
+
+task fatJar(type: Jar, dependsOn:'jar') {
+    manifest {
+        attributes 'Implementation-Title': 'wmsLoad',
+                'Implementation-Version': version,
+                'Main-Class': 'com.camptocamp.Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
